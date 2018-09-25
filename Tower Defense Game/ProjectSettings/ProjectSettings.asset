@@ -697,7 +697,7 @@ PlayerSettings:
     Purchasing: 0
     UNet: 0
     Unity_Ads: 0
-  facebookSdkVersion: 
+  facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 4d27d44d-7b1c-461d-ba51-5968761ab0ed
   projectName: 
