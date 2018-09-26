@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class EnemySpecs : MonoBehaviour {
+
+    public int Health;
 
 	// Use this for initialization
 	void Start () {
