@@ -5,10 +5,17 @@ using UnityEngine;
 public class Attack : MonoBehaviour {
 
     private Transform target;
-    public float range = 10f;
-    public string enemyTag = "Enemy";
 
-    public Transform TowerRotation;
+    [Header("Attributes")]
+    public float range = 10f;
+    public float fireRate = 1f;
+    private float fireCountdown = 0f;
+
+    [Header("Setup")]
+    public string enemyTag = "Enemy";
+    public Transform towerRotation;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +56,25 @@ public class Attack : MonoBehaviour {
         Vector3 dirToEnemy = target.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(dirToEnemy);
         Vector3 rotation = targetRotation.eulerAngles;
-        TowerRotation.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+        towerRotation.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+
+        if (fireCountdown <= 0f)
+        {
+            shoot();
+            fireCountdown = 1f / fireRate;
+        }
+
+        fireCountdown -= Time.deltaTime;
+    }
+
+    void shoot() {
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.Seek(target);
+        }
     }
 
     private void OnDrawGizmosSelected()
