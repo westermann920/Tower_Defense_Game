@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class EnemySpecs : MonoBehaviour {
 
-    public int Health;
+    public int health = 5;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void Damaged(int amount) {
+        health -= amount;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
